@@ -1,0 +1,27 @@
+.h1{
+   font-family: 'Nerko One', cursive;
+}
+
+.error{
+color :red;
+margin-left: 10px;
+margin-top: 10px;
+}
+.container {
+   width: 80%;
+   height: 85vh;
+   margin: 70px auto;
+   display: flex;
+   border-radius: 10px;
+   background: #3a36e4; /* fallback for old browsers */
+   background: -webkit-linear-gradient(
+     to right,
+     #3a36e4,
+     #acc3fd
+   ); /* Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(
+     to right,
+     #3a36e4,
+     #acc3fd
+   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ }
