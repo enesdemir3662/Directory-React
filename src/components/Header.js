@@ -1,7 +1,7 @@
 import React from "react";
-import TextInput from "./TextInput";
 import { useState } from "react";
-import { Button, Row } from "reactstrap";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import ModalExample from "./ModalExample";
 function Header({
   setModal,
@@ -42,18 +42,24 @@ function Header({
           setCopyPerson={setCopyPerson}
         />
       )}
-      <Row className="row-cols-lg-auto g-3 align-items-center ms-5">
-        <Button color="primary" className="ms-5 h1" onClick={() => personNew()}>
-          {" "}
+      <Stack spacing={2} direction="row" className="mt-3 mb-3">
+        <Button
+          variant="contained"
+          color="primary"
+          className="ms-5"
+          onClick={() => personNew()}
+          style={{ width: "120px" }}
+        >
           Yeni Kişi
         </Button>
-        <TextInput
-          name="search"
+        <input
           type="text"
-          placeHolder="Ara..."
+          name="search"
+          className="form-control"
+          placeholder="Ara..."
           onChange={(e) => onChange(e.target.value)}
         />
-      </Row>
+      </Stack>
     </div>
   );
 }

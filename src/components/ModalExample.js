@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Stack from "@mui/material/Stack";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
 
 const schema = Yup.object().shape({
   peopleName: Yup.string()
@@ -31,7 +47,6 @@ function ModalExample({
   setCopyPerson,
 }) {
   const toggle = () => setModal(!modal);
-  console.log("Model RENDER EDİLDİ");
   const [textModal, setTextModal] = useState({
     peopleName: "",
     peopleSurname: "",
@@ -124,12 +139,17 @@ function ModalExample({
 
   return (
     <div>
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle} onClick={() => resetModal()}>
-          {val1 == undefined ? "Yeni Kişi" : "Düzenleme"}
-        </ModalHeader>
+      <Modal
+        open={modal}
+        onClose={toggle}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
         <form onSubmit={handleSubmit(onSubmitHandler)}>
-          <ModalBody>
+          <Box sx={{ ...style, width: 400 }}>
+            <h2 id="parent-modal-title">
+              {val1 == undefined ? "Yeni Kişi" : "Düzenleme"}
+            </h2>
             <br />
             <input
               {...register("peopleName")}
@@ -149,7 +169,7 @@ function ModalExample({
               placeholder="Soyisim"
               type="text"
               onChange={(e) => onChange(e.target.value, "peopleSurname")}
-              defaultValue={val1 != undefined ? val1 : ""}
+              defaultValue={val2 != undefined ? val2 : ""}
               className="form-control"
               required
             />
@@ -161,21 +181,26 @@ function ModalExample({
               placeholder="Telefon"
               type="number"
               onChange={(e) => onChange(e.target.value, "peopleTel")}
-              defaultValue={val1 != undefined ? val1 : ""}
+              defaultValue={val3 != undefined ? val3 : ""}
               className="form-control"
               required
             />
             <p className="error">{errors.peopleTel?.message}</p>
             <br />
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={() => resetModal()}>
-              kapat
-            </Button>
-            <Button color="primary" type="submit">
-              Kaydet
-            </Button>{" "}
-          </ModalFooter>
+            <br />
+            <Stack spacing={2} direction="row">
+              <Button
+                color="secondary"
+                variant="contained"
+                onClick={() => resetModal()}
+              >
+                Kapat
+              </Button>
+              <Button color="primary" variant="contained" type="submit">
+                Kaydet
+              </Button>
+            </Stack>
+          </Box>
         </form>
       </Modal>
     </div>

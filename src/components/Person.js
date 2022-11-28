@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ModalExample from "./ModalExample";
-import { Button, Table } from "reactstrap";
+import Button from "@mui/material/Button";
+import Table from "@mui/material/Table";
 import { GlobalContext } from "../Context/GlobalState";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 
@@ -48,7 +49,7 @@ function Person({ person, setPerson, setModal, modal, setCopyPerson }) {
         />
       )}{" "}
       <div>
-        <Table hover>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <thead>
             <tr>
               <th>#</th>
@@ -69,13 +70,15 @@ function Person({ person, setPerson, setModal, modal, setCopyPerson }) {
                   <td>
                     <div>
                       <Button
-                        color="danger"
+                        color="error"
+                        variant="contained"
                         onClick={() => removePerson(people.id)}
                       >
                         <i className="fa-solid fa-trash"></i>
                       </Button>
                       <Button
                         color="success"
+                        variant="contained"
                         onClick={() => personEdit(people.id)}
                         className="ms-2"
                       >
