@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Stack from "@mui/material/Stack";
+import { TextField, Button, Box, Stack, Modal } from "@mui/material";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -151,39 +149,42 @@ function ModalExample({
               {val1 == undefined ? "Yeni Kişi" : "Düzenleme"}
             </h2>
             <br />
-            <input
+            <TextField
               {...register("peopleName")}
               name="peopleName"
-              placeholder="İsim"
+              required
+              label="İsim"
+              id="outlined-size-small"
+              size="small"
               type="text"
               onChange={(e) => onChange(e.target.value, "peopleName")}
               defaultValue={val1 != undefined ? val1 : ""}
-              className="form-control"
-              required
             />
             <p className="error">{errors.peopleName?.message}</p>
             <br />
-            <input
+            <TextField
               {...register("peopleSurname")}
               name="peopleSurname"
-              placeholder="Soyisim"
+              required
+              label="Soyisim"
+              id="outlined-size-small"
+              size="small"
               type="text"
               onChange={(e) => onChange(e.target.value, "peopleSurname")}
               defaultValue={val2 != undefined ? val2 : ""}
-              className="form-control"
-              required
             />
             <p className="error">{errors.peopleSurname?.message}</p>
             <br />
-            <input
+            <TextField
               {...register("peopleTel")}
               name="peopleTel"
-              placeholder="Telefon"
               type="number"
+              required
+              label="Telefon"
+              id="outlined-size-small"
+              size="small"
               onChange={(e) => onChange(e.target.value, "peopleTel")}
               defaultValue={val3 != undefined ? val3 : ""}
-              className="form-control"
-              required
             />
             <p className="error">{errors.peopleTel?.message}</p>
             <br />

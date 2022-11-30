@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import ModalExample from "./ModalExample";
-import Button from "@mui/material/Button";
-import Table from "@mui/material/Table";
+import { Table, Button } from "@mui/material";
 import { GlobalContext } from "../Context/GlobalState";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 
@@ -48,7 +46,7 @@ function Person({ person, setPerson, setModal, modal, setCopyPerson }) {
           setCopyPerson={setCopyPerson}
         />
       )}{" "}
-      <div>
+      <div style={{ textAlign: "center" }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <thead>
             <tr>
@@ -70,6 +68,7 @@ function Person({ person, setPerson, setModal, modal, setCopyPerson }) {
                   <td>
                     <div>
                       <Button
+                        sx={{ mr: 2 }}
                         color="error"
                         variant="contained"
                         onClick={() => removePerson(people.id)}
@@ -80,7 +79,6 @@ function Person({ person, setPerson, setModal, modal, setCopyPerson }) {
                         color="success"
                         variant="contained"
                         onClick={() => personEdit(people.id)}
-                        className="ms-2"
                       >
                         <i className="fa-solid fa-pen-to-square"></i>
                       </Button>

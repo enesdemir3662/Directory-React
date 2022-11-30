@@ -1,8 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import ModalExample from "./ModalExample";
+import { TextField, Button, Stack } from "@mui/material";
 function Header({
   setModal,
   modal,
@@ -11,13 +10,8 @@ function Header({
   setCopyPerson,
   copyPerson,
 }) {
-  const [age, setAge] = React.useState("");
   const [textModal, setTextModal] = useState();
   const [modalShow, setModalShow] = useState(false);
-  const [newPerson, setNewPerson] = useState([]);
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
 
   const onChange = (text) => {
     setTextModal(text);
@@ -42,21 +36,21 @@ function Header({
           setCopyPerson={setCopyPerson}
         />
       )}
-      <Stack spacing={2} direction="row" className="mt-3 mb-3">
+      <Stack spacing={2} ml={5} direction="row">
         <Button
           variant="contained"
           color="primary"
-          className="ms-5"
           onClick={() => personNew()}
           style={{ width: "120px" }}
         >
           Yeni Kişi
         </Button>
-        <input
-          type="text"
+        <TextField
+          label="Ara..."
+          id="outlined-size-small"
           name="search"
-          className="form-control"
-          placeholder="Ara..."
+          size="small"
+          type="text"
           onChange={(e) => onChange(e.target.value)}
         />
       </Stack>
