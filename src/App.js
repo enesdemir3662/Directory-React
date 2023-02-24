@@ -2,44 +2,41 @@ import Person from "./components/Person";
 import Header from "./components/Header";
 import React, { useState } from "react";
 import "./App.css";
-import { GlobalProvider } from "./Context/GlobalState";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PeopleView from "./components/PeopleView";
+import Modal from "./components/Modal";
+
 function App() {
+
   const [person, setPerson] = useState([]);
-  const [addModal, setAddModal] = useState(false);
-  const [editModal, setEditModal] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [values, setValues] = useState({name:"",surname:"",telephone:"",peopleId:1});
   const [copyPerson, setCopyPerson] = useState([]);
+
   return (
     <div>
+     {modalShow && (
+        <Modal
+         setModalShow={setModalShow}
+          person={person}
+          setPerson={setPerson}
+          setCopyPerson={setCopyPerson}
+          values={values}
+          setValues={setValues}
+        />
+      )}
       <Header
-        modal={addModal}
-        setModal={setAddModal}
-        person={person}
+        setModalShow={setModalShow}
         setPerson={setPerson}
         copyPerson={copyPerson}
         setCopyPerson={setCopyPerson}
+        person={person}
       />
-      <GlobalProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              index
-              element={
-                <Person
-                  person={person}
-                  setPerson={setPerson}
-                  modal={editModal}
-                  setModal={setEditModal}
-                  setCopyPerson={setCopyPerson}
-                />
-              }
-            />
-            <Route path="peopleView" element={<PeopleView />} />
-          </Routes>
-        </BrowserRouter>
-      </GlobalProvider>
+      <br/>
+      <Person
+        person={person}
+        setPerson={setPerson}
+        setValues={setValues}
+        setModalShow={setModalShow}
+      />
     </div>
   );
 }

@@ -1,59 +1,36 @@
-import React from "react";
-import { useState } from "react";
-import ModalExample from "./ModalExample";
-import { TextField, Button, Stack } from "@mui/material";
+import React,{ useState }  from "react";
+
 function Header({
-  setModal,
-  modal,
   person,
   setPerson,
-  setCopyPerson,
   copyPerson,
+  setModalShow
 }) {
   const [textModal, setTextModal] = useState();
-  const [modalShow, setModalShow] = useState(false);
 
+  //Search Change
   const onChange = (text) => {
     setTextModal(text);
-    person = person.filter((people) => people.peopleName.includes(text));
+    person = person.filter((people) => people.peopleName.includes(text) || people.peopleSurname.includes(text) || people.peopleTel.includes(text));
     text == "" ? setPerson(copyPerson) : setPerson(person);
     if (person.length == 0) {
+      setPerson(copyPerson)
     }
   };
 
-  const personNew = () => {
-    setModal(true);
-    setModalShow(true);
-  };
   return (
     <div>
-      {modalShow && (
-        <ModalExample
-          modal={modal}
-          setModal={setModal}
-          person={person}
-          setPerson={setPerson}
-          setCopyPerson={setCopyPerson}
-        />
-      )}
-      <Stack spacing={2} ml={5} direction="row">
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => personNew()}
-          style={{ width: "120px" }}
-        >
-          Yeni Kişi
-        </Button>
-        <TextField
-          label="Ara..."
-          id="outlined-size-small"
-          name="search"
-          size="small"
-          type="text"
-          onChange={(e) => onChange(e.target.value)}
-        />
-      </Stack>
+      <br/>
+      <div style={{display:"flex"}}>
+        <button 
+            onClick={() => setModalShow(true)}
+            style={{ width: "120px" ,marginLeft:"4rem"}}
+            className="newPerson btn">Yeni Kişi</button>
+        <div style={{width:"15rem"}}>
+            <input type="text" id="outlined-size-small" name="search" placeholder="Ara.."
+            style={{marginLeft:"4rem"}} onChange={(e) => onChange(e.target.value)}/>
+        </div>
+      </div>
     </div>
   );
 }
